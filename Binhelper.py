@@ -94,8 +94,8 @@ class Form1(wx.Panel):
     def text2hex(self,event):
         n=0
         strhex=''
-        list1=list(str)
-        str=self.loggerIn.GetValue()
+        s=self.loggerIn.GetValue()
+        list1=list(s)
         while n< len(list1):
             strhex+=hex(ord(list1[n]))+" "
             n+=1
@@ -113,8 +113,8 @@ class Form1(wx.Panel):
     def text2oct(self,event):
         n=0
         stroct=''
-        str=self.loggerIn.GetValue()
-        list1=list(str)
+        s=self.loggerIn.GetValue()
+        list1=list(s)
         while n< len(list1):
             stroct+=oct(ord(list1[n]))+" "
             n+=1
@@ -132,8 +132,8 @@ class Form1(wx.Panel):
     def text2bin(self,event):
         n=0
         strbin=''
-        str=self.loggerIn.GetValue()
-        list1=list(str)
+        s=self.loggerIn.GetValue()
+        list1=list(s)
         while n< len(list1):
             strbin+=bin(ord(list1[n]))+"  "
             n+=1
