@@ -21,7 +21,7 @@ class Form1(wx.Panel):
     def __init__(self, *args, **kwargs):
         super(Form1, self).__init__(*args, **kwargs)
 	self.colors = ['add','and', 'rol','sub',  'or','ror','mul','xor','shl','div','not','shr','divmod','neg','pow','abs','round','bswap']
-	self.jinzhi=['2','10','16']
+	self.jinzhi=['10','16','2']
 	self.createControls()
         self.bindEvents()
         self.doLayout()
@@ -164,7 +164,7 @@ class Form1(wx.Panel):
                 result=str(int(operator1,2)^int(operator2,2))
                 self.txt3.SetValue(result)
             elif num=="10":
-                result=str(string.atoi(operator1)^string.atoi(operator2))
+                result=str(string.int(operator1)^string.int(operator2))
                 self.txt3.SetValue(result)
             elif num=="16":
                 result=str(int(operator1,16)^int(operator2,16))
@@ -272,46 +272,46 @@ class Form1(wx.Panel):
 
         if cal=="add" :
             if num=="2":
-                result=str(int(operator1,2)+int(operator2,2))
+                result=str(float(operator1,2)+float(operator2,2))
                 self.txt3.SetValue(result)
             elif num=="10":
-                result=str(string.atoi(operator1)+string.atoi(operator2))
+                result=str(float(operator1)+float(operator2))
                 self.txt3.SetValue(result)
             elif num=="16":
-                result=str(int(operator1,16)+int(operator2,16))
+                result=str(float(operator1,16)+float(operator2,16))
                 self.txt3.SetValue(result)
 
         if cal=="sub" :
             if num=="2":
-                result=str(int(operator1,2)-int(operator2,2))
+                result=str(float(operator1,2)-float(operator2,2))
                 self.txt3.SetValue(result)
             elif num=="10":
-                result=str(string.atoi(operator1)-string.atoi(operator2))
+                result=str(float(operator1)-float(operator2))
                 self.txt3.SetValue(result)
             elif num=="16":
-                result=str(int(operator1,16)-int(operator2,16))
+                result=str(float(operator1,16)-float(operator2,16))
                 self.txt3.SetValue(result)
 
         if cal=="mul":
             if num=="2":
-                result=str(int(operator1,2)*int(operator2,2))
+                result=str(float(operator1,2)*float(operator2,2))
                 self.txt3.SetValue(result)
             elif num=="10":
-                result=str(string.atoi(operator1)*string.atoi(operator2))
+                result=str(float(operator1)*float(operator2))
                 self.txt3.SetValue(result)
             elif num=="16":
-                result=str(int(operator1,16)*int(operator2,16))
+                result=str(float(operator1,16)*float(operator2,16))
                 self.txt3.SetValue(result)
 
         if cal=="div":
             if num=="2":
-                result=str(int(operator1,2)/int(operator2,2))
+                result=str(float(operator1,2)/float(operator2,2))
                 self.txt3.SetValue(result)
             elif num=="10":
-                result=str(string.atoi(operator1)/string.atoi(operator2))
+                result=str(float(operator1)/float(operator2))
                 self.txt3.SetValue(result)
             elif num=="16":
-                result=str(int(operator1,16)/int(operator2,16))
+                result=str(float(operator1,16)/float(operator2,16))
                 self.txt3.SetValue(result)
 
         if cal=='bswap':
