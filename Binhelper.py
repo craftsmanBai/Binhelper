@@ -6,6 +6,7 @@ from unicodedata import normalize
 import wx
 import os
 import re
+import time
 import urllib
 import string
 import base64
@@ -37,6 +38,7 @@ class Form1(wx.Panel):
 	self.but6 = wx.Button(self, label="Oct->Text")
 	self.but7 = wx.Button(self, label="Text->Bin")
 	self.but8 = wx.Button(self, label="Bin->Text")
+
         self.but9 = wx.Button(self, label="result")
         self.txt1 = wx.TextCtrl(self, -1, "",
                 size=(175, -1))
@@ -66,6 +68,7 @@ class Form1(wx.Panel):
 	     (self.but7, wx.EVT_BUTTON, self.text2bin),
 	     (self.but8, wx.EVT_BUTTON, self.bin2text),
             (self.but9, wx.EVT_BUTTON, self.caculate)
+
 	     ]:
             control.Bind(event, handler)
 
@@ -152,6 +155,10 @@ class Form1(wx.Panel):
 
     def doLayout(self):
         raise NotImplementedError
+
+
+
+
 
     def caculate(self,event):
         operator1=self.txt1.GetValue()
@@ -788,9 +795,11 @@ class Form4(wx.Panel):
         raise NotImplementedError
 
     def savetext(self,event):
-        str=self.tnote.GetValue()
-        f=open('note.txt','w')
-        f.write(str+'\n')
+        str1=self.tnote.GetValue()
+        x=time.localtime(time.time())
+        a=str(time.strftime('%Y-%m-%d %H:%M:%S',x))
+        f=open(a,'w')
+        f.write(str1+'\n')
         f.close()
 
     def cleartext(self,event):
