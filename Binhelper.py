@@ -67,10 +67,16 @@ class Form1(wx.Panel):
 	     (self.but6, wx.EVT_BUTTON, self.oct2text),
 	     (self.but7, wx.EVT_BUTTON, self.text2bin),
 	     (self.but8, wx.EVT_BUTTON, self.bin2text),
-            (self.but9, wx.EVT_BUTTON, self.caculate)
+            (self.but9, wx.EVT_BUTTON, self.caculate),
+
 
 	     ]:
             control.Bind(event, handler)
+
+
+
+
+
 
     def text2dec(self,event):
         list1=list(self.loggerIn.GetValue())
@@ -86,13 +92,17 @@ class Form1(wx.Panel):
         self.loggerOut.SetValue(strd)
 
     def dec2text(self,event):
-        n=0
+
         s=''
         list1=self.loggerIn.GetValue().split(' ')
-        while n<len(list1):
-	        s+=chr(string.atoi(list1[n]))
-	        n+=1
-        self.loggerOut.SetValue(s)
+        for i in list1:
+            tmp=string.atoi(i)
+            if 31<tmp<127:
+                s+=chr(tmp)
+            else:
+                self.loggerOut.SetValue("Error:Out of Range!")
+                break
+            self.loggerOut.SetValue(s)
 
     def text2hex(self,event):
         n=0
@@ -105,13 +115,21 @@ class Form1(wx.Panel):
         self.loggerOut.SetValue(strhex)
 
     def hex2text(self,event):
-        n=0
         s=''
         list1=self.loggerIn.GetValue().split(' ')
-        while n<len(list1):
-	        s+=chr(string.atoi(list1[n],16))
-	        n+=1
-        self.loggerOut.SetValue(s)
+        for i in list1:
+
+            tmp=string.atoi(i,16)
+            if 0x1f<tmp<0x7f:
+                s+=chr(tmp)
+            else:
+                self.loggerOut.SetValue("Error:Out of Range!")
+                break
+            self.loggerOut.SetValue(s)
+
+
+
+
 
     def text2oct(self,event):
         n=0
@@ -124,13 +142,20 @@ class Form1(wx.Panel):
         self.loggerOut.SetValue(stroct)
 
     def oct2text(self,event):
-        n=0
         s=''
         list1=self.loggerIn.GetValue().split(' ')
-        while n<len(list1):
-	        s+=chr(string.atoi(list1[n],8))
-	        n+=1
-        self.loggerOut.SetValue(s)
+
+
+        for i in list1:
+
+            tmp=string.atoi(i,8)
+            if 037<tmp<0200:
+                s+=chr(tmp)
+            else:
+                self.loggerOut.SetValue("Error:Out of Range!")
+                break
+
+            self.loggerOut.SetValue(s)
 
     def text2bin(self,event):
         n=0
@@ -141,15 +166,25 @@ class Form1(wx.Panel):
             strbin+=bin(ord(list1[n]))+"  "
             n+=1
         self.loggerOut.SetValue(strbin)
+
+
+
+
     def bin2text(self,event):
-        n=0
         s=''
         list1=self.loggerIn.GetValue().split(' ')
-        while n<len(list1):
-	        s+=chr(string.atoi(list1[n],2))
-	        n+=1
-        self.loggerOut.SetValue(s)
 
+
+        for i in list1:
+
+            tmp=string.atoi(i,2)
+            if 0b11111<tmp<0b1111111:
+                s+=bin(tmp)+" "
+            else:
+                self.loggerOut.SetValue("Error:Out of Range!")
+                break
+
+            self.loggerOut.SetValue(s)
     def choseal(self,event):
         str=self.loggerIn.GetValue()
 
@@ -279,46 +314,46 @@ class Form1(wx.Panel):
 
         if cal=="add" :
             if num=="2":
-                result=str(float(operator1,2)+float(operator2,2))
+                result=str(bin(string.atoi(operator1,2)+string.atoi(operator2,2)))
                 self.txt3.SetValue(result)
             elif num=="10":
                 result=str(float(operator1)+float(operator2))
                 self.txt3.SetValue(result)
             elif num=="16":
-                result=str(float(operator1,16)+float(operator2,16))
+                result=str(hex(string.atoi(operator1,16)+string.atoi(operator2,16)))
                 self.txt3.SetValue(result)
 
         if cal=="sub" :
             if num=="2":
-                result=str(float(operator1,2)-float(operator2,2))
+                result=str(bin(string.atoi(operator1,2)-string.atoi(operator2,2)))
                 self.txt3.SetValue(result)
             elif num=="10":
                 result=str(float(operator1)-float(operator2))
                 self.txt3.SetValue(result)
             elif num=="16":
-                result=str(float(operator1,16)-float(operator2,16))
+                result=str(hex(string.atoi(operator1,16)-string.atoi(operator2,16)))
                 self.txt3.SetValue(result)
 
         if cal=="mul":
             if num=="2":
-                result=str(float(operator1,2)*float(operator2,2))
+                result=str(bin(string.atoi(operator1,2)*string.atoi(operator2,2)))
                 self.txt3.SetValue(result)
             elif num=="10":
                 result=str(float(operator1)*float(operator2))
                 self.txt3.SetValue(result)
             elif num=="16":
-                result=str(float(operator1,16)*float(operator2,16))
+                result=str(hex(string.atoi(operator1,16)*string.atoi(operator2,16)))
                 self.txt3.SetValue(result)
 
         if cal=="div":
             if num=="2":
-                result=str(float(operator1,2)/float(operator2,2))
+                result=str(bin(string.atoi(operator1,2)/string.atoi(operator2,2)))
                 self.txt3.SetValue(result)
             elif num=="10":
                 result=str(float(operator1)/float(operator2))
                 self.txt3.SetValue(result)
             elif num=="16":
-                result=str(float(operator1,16)/float(operator2,16))
+                result=str(hex(string.atoi(operator1,16)/string.atoi(operator2,16)))
                 self.txt3.SetValue(result)
 
         if cal=='bswap':
@@ -458,7 +493,13 @@ class Form2(wx.Panel):
         str1=self.rep.GetValue()
         str2=self.to.GetValue()
         text=self.loggerIn.GetValue()
-        self.loggerOut.SetValue(str(re.subn(str1, str2,text)[0]))
+
+        if str2!="":
+            self.loggerOut.SetValue(str(re.subn(str1, str2,text)[0]))
+        elif str2=="":
+			self.loggerOut.SetValue(text.replace(" ","").replace("\n","").replace("\t",""))
+
+
 
     def dec(self,event):
         if self.listBox.GetStringSelection()=='CaeSar':
@@ -832,7 +873,7 @@ class FrameWithForms(wx.Frame):
         #super(FrameWithForms, self).__init__(*args, **kwargs)
 	#self.SetClientSize(notebook.GetBestSize())	
 
-	wx.Frame.__init__(self, None, -1, 'BinHelper 1.0.0 by Zing',size=(690, 590))
+	wx.Frame.__init__(self, None, -1, 'BinHelper 1.0.1 by Zing',size=(690, 590))
 
 	notebook = wx.Notebook(self)
         form1 = FormPage1(notebook)
