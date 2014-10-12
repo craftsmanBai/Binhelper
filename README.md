@@ -4,7 +4,7 @@ Binhelper helps providing basic funcitons in reverse engineering, with a GUI ,co
 
 ##Version
 
-1.0.0
+1.0.1
 
 ##Dependencies
 
